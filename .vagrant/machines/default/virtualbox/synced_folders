@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/gamelibrary":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/gamelibrary","hostpath":"/Users/jacoblandry/Sites/gameLibrary","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/jacoblandry/Sites/gameLibrary","disabled":false,"__vagrantfile":true}}}
