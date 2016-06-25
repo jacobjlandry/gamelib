@@ -13,7 +13,8 @@ class GiantBomb extends Model
     public static function list($resource, $page)
     {
         ini_set("user_agent","Games Library");
-        return json_decode(file_get_contents(self::baseURL . $resource . self::baseURI . "&offset=" . ($page-1)*100));
+        $params = array_merge(self::baseURI, array('offset' => ($page-1)*100));
+        return json_decode(file_get_contents(self::baseURL . $resource . '?' . http_build_query($params)));
     }
 
     public static function search($term)
@@ -28,6 +29,6 @@ class GiantBomb extends Model
     {
         ini_set("user_agent","Games Library");
         //Log::debug('GiantBomb API Call', array(self::baseURL, $resource, $id, self::baseURI));
-        return json_decode(file_get_contents(self::baseURL . $resource . "/" . $id . self::baseURI));
+        return json_decode(file_get_contents(self::baseURL . $resource . "/" . $id . '?' . http_build_query(self::baseURI)));
     }
 }

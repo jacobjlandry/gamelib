@@ -13,7 +13,7 @@
                 <li class="@if($resource == "platforms")active @endif"><a href="/list/platforms"><i class="fa fa-plug fa-4x"></i></a></li>
                 <li class="@if($resource == "games")active @endif"><a href="/list/games"><i class="fa fa-gamepad fa-4x"></i></a></li>
                 <li><a href="/login"><i class="fa fa-user fa-4x"></i></a></li>
-                <li><div class="searchbar"><input type="text" id="term" /><a id="search" href="#"><i class="fa fa-search fa-4x"></i></a></div></li>
+                <li><div class="searchbar" id="searchbar"><input type="text" id="term" /><a id="search" href="#"><i class="fa fa-search fa-4x"></i></a></div></li>
             </ul>
         </div>
         <div class="maincontent">
@@ -26,9 +26,26 @@
                 }
             });
 
+            // submit search via button
             $('#search').on('click', function(e) {
-                window.location = '/search/' + $('#term').val();
+                if($('#term').val()) {
+                    window.location = '/search/' + $('#term').val();
+                }
             });
+
+            // allow enter to submit text field
+            $('#term').on('keypress', function(e) {
+                if(e.keyCode == 13) {
+                    $('#search').click();
+                }
+            });
+
+            // allow clicking anywhere on search bar to activate text field
+            $('#searchbar').on('click', function(e) {
+                console.log('on it!');
+                $('#term').focus();
+                $('#term').select();
+            })
 
             $('.claim').on('click', function(e) {
                 $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').show();
