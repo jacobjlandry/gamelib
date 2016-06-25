@@ -27,6 +27,6 @@ class GamesPlatforms extends Migration
      */
     public function down()
     {
-        Schema::drop('games_platforms');
+        Schema::drop('game_platform');
     }
 }

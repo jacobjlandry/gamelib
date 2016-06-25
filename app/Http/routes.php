@@ -56,7 +56,7 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
                     }
 
                     // Map Game to Platform
-                    DB::table('game_platform')->insert(['game_id' => $item->id, 'platform_id' => $platform->id,
+                    DB::table('game_platform')->insert(['game_id' => $item->bomb_id, 'platform_id' => $platform->bomb_id,
                         'created_at' => date('Y-m-d H:i:s', time()), 'updated_at' => date('Y-m-d H:i:s', time())]);
                 }
             }
@@ -67,7 +67,18 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
 });
 
 Route::get('/search/{term}', function($term) {
-    return \App\Giantbomb::search($term);
+    $list = \App\Giantbomb::search($term);
+
+    return view('list', ['list' => $list->results,
+        'max_results' => $list->number_of_total_results,
+        'page_results' => $list->number_of_page_results,
+        'page_limit' => $list->limit,
+        'page' => 1,
+        'resource' => "games"]);
+});
+
+Route::get('/user/claim/{resource}/{id}/{platformId?}', function($resource, $id, $platformId = null) {
+    return Auth::user()->claim($resource, $id, $platformId);
 });
 
 Route::auth();

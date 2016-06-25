@@ -22,7 +22,9 @@ div.nav {
       padding-right: 110px; }
       div.nav ul.nav li a {
         color: #ffffff; }
-      div.nav ul.nav li a:hover {
+      div.nav ul.nav li a .fa-search {
+        color: #2a2730; }
+      div.nav ul.nav li a:hover, div.nav ul.nav li .fa-search:hover {
         color: #ff0000;
         background: none; }
     div.nav ul.nav li.active {
@@ -30,6 +32,15 @@ div.nav {
       background: #ff0000; }
     div.nav ul.nav li.active a:hover {
       color: #ffffff; }
+  div.nav .searchbar {
+    background: #FFFFFF;
+    border-radius: 50px;
+    width: 250px; }
+    div.nav .searchbar input {
+      border: none;
+      outline: none;
+      position: relative;
+      top: -17px; }
 
 .maincontent {
   background: #FFFFFF;
@@ -70,6 +81,20 @@ div.nav {
           font-size: 17px;
           text-align: center;
           height: 70px; }
+        .maincontent .list-container .list .item .platform-list {
+          display: none;
+          z-index: 99;
+          background: #ffffff;
+          position: relative;
+          bottom: 0px;
+          right: 0px; }
+          .maincontent .list-container .list .item .platform-list ul {
+            list-style: none; }
+            .maincontent .list-container .list .item .platform-list ul li:hover {
+              background: #2a2730;
+              color: #ffffff; }
+            .maincontent .list-container .list .item .platform-list ul li {
+              cursor: pointer; }
   .maincontent .item-detail {
     text-align: center; }
     .maincontent .item-detail table {

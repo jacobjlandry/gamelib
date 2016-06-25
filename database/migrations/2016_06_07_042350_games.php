@@ -16,7 +16,7 @@ class Games extends Migration
             $table->increments('id');
             $table->integer('bomb_id');
             $table->text('name');
-            $table->binary('image');
+            $table->binary('image')->nullable();
             $table->text('bomb_url');
             $table->text('detail_url');
             $table->timestamps();

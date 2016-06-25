@@ -12,16 +12,16 @@ class UsersGames extends Migration
      */
     public function up()
     {
-        Schema::create('users_games', function(Blueprint $table) {
+        Schema::create('user_game', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('game_id');
-            $table->boolean('own');
-            $table->boolean('owned');
+            $table->integer('platform_id');
             $table->boolean('playing');
             $table->boolean('played');
             $table->integer('rating');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +32,6 @@ class UsersGames extends Migration
      */
     public function down()
     {
-        Schema::drop('users_games');
+        Schema::drop('user_game');
     }
 }

@@ -12,7 +12,14 @@ class UsersPlatforms extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('user_platform', function(Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('platform_id');
+            $table->integer('rating');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +29,6 @@ class UsersPlatforms extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('user_platform');
     }
 }

@@ -23,7 +23,10 @@ div.nav {
       a {
         color: #ffffff;
       }
-      a:hover {
+      a .fa-search {
+        color: #2a2730;
+      }
+      a:hover, .fa-search:hover {
         color: #ff0000;
         background: none;
       }
@@ -34,6 +37,18 @@ div.nav {
     }
     li.active a:hover {
       color: #ffffff;
+    }
+  }
+  .searchbar {
+    background: #FFFFFF;
+    border-radius: 50px;
+    width: 250px;
+
+    input {
+      border: none;
+      outline: none;
+      position: relative;
+      top: -17px;
     }
   }
 }
@@ -92,6 +107,25 @@ div.nav {
           font-size: 17px;
           text-align: center;
           height: 70px;
+        }
+        .platform-list {
+          display: none;
+          z-index: 99;
+          background: #ffffff;
+          position: relative;
+          bottom: 0px;
+          right: 0px;
+
+          ul {
+            list-style: none;
+            li:hover {
+              background: #2a2730;
+              color: #ffffff;
+            }
+            li {
+              cursor: pointer;
+            }
+          }
         }
       }
     }

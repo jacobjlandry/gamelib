@@ -9,10 +9,14 @@
                 <tr>
                     <th colspan="2">
                         {{ $item->name }}
-                        <div class="controls" style="float: right;">
-                            <a href="#"><i class="fa fa-plus-circle fa-pull-right @if(Auth::user()->has($resource, $item->id))full @endif"></i></a>
-                            <a href="#"><i class="fa fa-pull-right {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
-                            <a href="#"><i class="fa fa-minus-circle fa-pull-right @if(Auth::user()->has($resource, $item->id))full @endif"></i></a>
+                        <div class="controls rating" style="display: inline; padding-left: 15px;">
+                            @for($x = 0; $x < 5; $x++)
+                                <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
+                            @endfor
+                        </div>
+                        <div id="{{ $resource }}{{ $item->id }}" class="controls" style="float: right;">
+                            <a href="#"><i class="claim fa fa-plus-circle fa-pull-right @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
+                            <a href="#"><i class="toss fa fa-minus-circle fa-pull-right @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
                         </div>
                     </th>
                 </tr>

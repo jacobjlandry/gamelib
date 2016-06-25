@@ -13,11 +13,31 @@
                 <li class="@if($resource == "platforms")active @endif"><a href="/list/platforms"><i class="fa fa-plug fa-4x"></i></a></li>
                 <li class="@if($resource == "games")active @endif"><a href="/list/games"><i class="fa fa-gamepad fa-4x"></i></a></li>
                 <li><a href="/login"><i class="fa fa-user fa-4x"></i></a></li>
-                <li><a href=""><i class="fa fa-search fa-4x"></i></a></li>
+                <li><div class="searchbar"><input type="text" id="term" /><a id="search" href="#"><i class="fa fa-search fa-4x"></i></a></div></li>
             </ul>
         </div>
         <div class="maincontent">
             @yield('content')
         </div>
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#search').on('click', function(e) {
+                window.location = '/search/' + $('#term').val();
+            });
+
+            $('.claim').on('click', function(e) {
+                $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').show();
+                $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms li').on('click', function(e2) {
+                    $.get('/user/claim/{{ $resource }}/' + $(e.target).attr('id') + "/" + $(e2.target).attr('id'));
+                    $('#{{ $resource }}' + $(e.target).attr('id') + ' .fa').addClass('full');
+                    $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').hide();
+                });
+            });
+        </script>
     </body>
 </html>

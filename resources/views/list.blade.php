@@ -15,12 +15,21 @@
                     <div class="title">
                         {{ $item->name }}
                     </div>
-                    <div class="controls">
-                        <a href="#"><i class="fa fa-minus-circle @if(Auth::user()->has($resource, $item->id))full @endif"></i></a>
+                    <div id="{{ $resource }}{{ $item->id }}" class="controls">
+                        <a href="#"><i class="toss fa fa-minus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
                         <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
-                        <a href="#"><i class="fa fa-plus-circle @if(Auth::user()->has($resource, $item->id))full @endif"></i></a>
+                        <a href="#"><i class="claim fa fa-plus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
                     </div>
                 </a>
+                <div id="{{ $resource }}{{ $item->id }}Platforms" class="platform-list">
+                    <ul>
+                        @if(is_array($item->platforms))
+                            @foreach($item->platforms as $platform)
+                                <li id="{{ $platform->id }}">{{ $platform->name }}</li>
+                            @endforeach
+                        @endif
+                    </ul>
+                </div>
             </div>
         @endforeach
         </div>
