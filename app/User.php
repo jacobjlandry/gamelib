@@ -73,6 +73,27 @@ class User extends Authenticatable
     }
 
     /**
+     * list of games user owns
+     * @param $platformId
+     */
+    public function games($platformId = null)
+    {
+        if($platformId) {
+            return \App\UserGame::where('platform_id', $platformId)->get();
+        }
+
+        return \App\UserGame::all();
+    }
+
+    /**
+     * list of platforms user owns
+     */
+    public function platforms()
+    {
+        return \App\UserPlatform::all();
+    }
+
+    /**
      * Claim Ownership of a Product
      *
      * @param $resource

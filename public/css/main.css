@@ -9,7 +9,8 @@ div.nav {
   width: 100%;
   text-align: center;
   background-color: #2a2730;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 99; }
   div.nav ul.nav {
     list-style: none;
     width: 100%;
@@ -109,5 +110,42 @@ div.nav {
     text-align: center; }
     .maincontent .paginator nav {
       margin: auto; }
+  .maincontent .welcome .panel-body {
+    height: 400px; }
+  .maincontent .welcome #platformChart {
+    position: absolute;
+    left: 0px;
+    top: 50px; }
+  .maincontent .welcome #gamesCount {
+    position: absolute;
+    left: 480px;
+    top: 50px; }
+    .maincontent .welcome #gamesCount .number {
+      display: inline-block;
+      color: #1976D2;
+      font-size: 84px;
+      width: 150px;
+      text-align: center; }
+    .maincontent .welcome #gamesCount .number a:hover {
+      color: #1976D2;
+      text-decoration: none; }
+    .maincontent .welcome #gamesCount .descriptor {
+      display: inline;
+      font-size: 45px;
+      padding-left: 50px; }
+  .maincontent .welcome #platformCount {
+    position: absolute;
+    left: 480px;
+    top: 200px; }
+    .maincontent .welcome #platformCount .number {
+      display: inline-block;
+      color: #1976D2;
+      font-size: 84px;
+      width: 150px;
+      text-align: center; }
+    .maincontent .welcome #platformCount .descriptor {
+      display: inline;
+      font-size: 45px;
+      padding-left: 50px; }
 
 /*# sourceMappingURL=main.css.map */

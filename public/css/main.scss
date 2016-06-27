@@ -1,6 +1,7 @@
 body {
   background: #ffffff;
 }
+
 div.nav {
   position: fixed;
   left: 0px;
@@ -10,6 +11,8 @@ div.nav {
   text-align: center;
   background-color: #2a2730;
   overflow: hidden;
+  z-index: 99;
+
   ul.nav {
     list-style: none;
     width: 100%;
@@ -150,6 +153,57 @@ div.nav {
 
     nav {
       margin: auto;
+    }
+  }
+
+  .welcome {
+    .panel-body {
+      height: 400px;
+    }
+
+    #platformChart {
+      position: absolute;
+      left: 0px;
+      top: 50px;
+    }
+    #gamesCount {
+      position: absolute;
+      left: 480px;
+      top: 50px;
+      .number {
+        display: inline-block;
+        color: #1976D2;
+        font-size: 84px;
+        width: 150px;
+        text-align: center;
+      }
+      .number a:hover {
+        color: #1976D2;
+        text-decoration: none;
+      }
+      .descriptor {
+        display: inline;
+        font-size: 45px;
+        padding-left: 50px;
+      }
+    }
+    #platformCount {
+      position: absolute;
+      left: 480px;
+      top: 200px;
+
+      .number {
+        display: inline-block;
+        color: #1976D2;
+        font-size: 84px;
+        width: 150px;
+        text-align: center;
+      }
+      .descriptor {
+        display: inline;
+        font-size: 45px;
+        padding-left: 50px;
+      }
     }
   }
 }

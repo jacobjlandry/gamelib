@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/login', 'UserController@login');
+Route::get('/', 'UserController@home');
 
 Route::get('list/{resource}/{page?}', function($resource, $page = 1) {
     $list = \App\GiantBomb::list($resource, $page);
@@ -81,6 +80,4 @@ Route::get('/user/claim/{resource}/{id}/{platformId?}', function($resource, $id,
     return Auth::user()->claim($resource, $id, $platformId);
 });
 
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
+Route::get('/user/games', 'UserController@games');

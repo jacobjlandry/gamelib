@@ -2,36 +2,36 @@
 @section('content')
     <div class="list-container">
         <div class="list">
-        @foreach($list as $item)
-            <div class="item">
-                <a href="/basic/{{ $resource }}/{{ $item->id }}">
-                    <div class="image">
-                        @if(is_object($item->image))
-                            <img src="{{ $item->image->thumb_url }}" />
-                        @else
-                            <i class="fa fa-chain-broken fa-4x"></i>
+            @foreach($list as $item)
+                <div class="item">
+                    <a href="/basic/{{ $resource }}/{{ $item->id }}">
+                        <div class="image">
+                            @if(is_object($item->image))
+                                <img src="{{ $item->image->thumb_url }}" />
+                            @else
+                                <i class="fa fa-chain-broken fa-4x"></i>
+                            @endif
+                        </div>
+                        <div class="title">
+                            {{ $item->name }}
+                        </div>
+                        <div id="{{ $item->id }}" class="controls">
+                            <a href="#"><i class="toss fa fa-minus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
+                            <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
+                            <a href="#"><i class="claim fa fa-plus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
+                        </div>
+                    </a>
+                    <div id="{{ $resource }}{{ $item->id }}Platforms" class="platform-list">
+                        @if(isset($item->platforms) && is_array($item->platforms))
+                            <ul>
+                                @foreach($item->platforms as $platform)
+                                    <li id="{{ $platform->id }}">{{ $platform->name }}</li>
+                                @endforeach
+                            </ul>
                         @endif
                     </div>
-                    <div class="title">
-                        {{ $item->name }}
-                    </div>
-                    <div id="{{ $resource }}{{ $item->id }}" class="controls">
-                        <a href="#"><i class="toss fa fa-minus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
-                        <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
-                        <a href="#"><i class="claim fa fa-plus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
-                    </div>
-                </a>
-                <div id="{{ $resource }}{{ $item->id }}Platforms" class="platform-list">
-                    <ul>
-                        @if(is_array($item->platforms))
-                            @foreach($item->platforms as $platform)
-                                <li id="{{ $platform->id }}">{{ $platform->name }}</li>
-                            @endforeach
-                        @endif
-                    </ul>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
         </div>
     </div>
     <div class="paginator">
