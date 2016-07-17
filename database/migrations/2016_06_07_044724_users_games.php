@@ -19,6 +19,7 @@ class UsersGames extends Migration
             $table->integer('platform_id');
             $table->boolean('playing');
             $table->boolean('played');
+            $table->integer('beat');
             $table->integer('rating');
             $table->timestamps();
             $table->softDeletes();

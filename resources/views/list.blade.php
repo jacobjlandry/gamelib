@@ -4,21 +4,26 @@
         <div class="list">
             @foreach($list as $item)
                 <div class="item">
+                    @if(Auth::user()->has($resource, $item->id))
+                        <div class="ribbon-wrapper-green"><div class="ribbon-green">Owned</div></div>
+                    @endif
                     <a href="/basic/{{ $resource }}/{{ $item->id }}">
                         <div class="image">
                             @if(is_object($item->image))
-                                <img src="{{ $item->image->thumb_url }}" />
+                                <div class="img"><img src="{{ $item->image->small_url }}" width="125" /></div>
                             @else
                                 <i class="fa fa-chain-broken fa-4x"></i>
                             @endif
                         </div>
+                    </a>
+                    <div id="{{ $item->id }}" class="controls">
+                        <a href="#"><i class="toss fa fa-minus-circle" id="{{ $item->id }}"></i></a>
+                        <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
+                        <a href="#"><i class="claim fa fa-plus-circle" id="{{ $item->id }}"></i></a>
+                    </div>
+                    <a href="/basic/{{ $resource}}/{{ $item->id }}">
                         <div class="title">
                             {{ $item->name }}
-                        </div>
-                        <div id="{{ $item->id }}" class="controls">
-                            <a href="#"><i class="toss fa fa-minus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
-                            <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
-                            <a href="#"><i class="claim fa fa-plus-circle @if(Auth::user()->has($resource, $item->id))full @endif" id="{{ $item->id }}"></i></a>
                         </div>
                     </a>
                     <div id="{{ $resource }}{{ $item->id }}Platforms" class="platform-list">

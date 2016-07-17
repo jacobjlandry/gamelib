@@ -64,24 +64,79 @@ div.nav {
     .maincontent .controls i.fa-plus-circle.full, .maincontent .controls i.fa-plus-circle:hover {
       color: #00CC00; }
   .maincontent .list-container {
-    width: 1280px;
     margin: auto; }
     .maincontent .list-container .list {
-      padding: 0px; }
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0px;
+      margin: auto; }
       .maincontent .list-container .list .item {
+        display: flex;
+        flex-direction: column;
         padding: 10px;
         width: 182px;
-        height: 302px;
-        float: left; }
-        .maincontent .list-container .list .item .image {
+        float: left;
+        border: 1px solid #cccccc;
+        border-radius: 15px;
+        -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+        margin: 5px;
+        position: relative;
+        z-index: 90; }
+        .maincontent .list-container .list .item .ribbon-wrapper-green {
+          width: 85px;
+          height: 88px;
+          overflow: hidden;
+          position: absolute;
+          top: -1px;
+          right: -1px; }
+        .maincontent .list-container .list .item .ribbon-green {
+          font: bold 15px Sans-Serif;
           text-align: center;
-          height: 180px; }
+          -webkit-text-stroke: 0.2px #2a2730;
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          -o-transform: rotate(45deg);
+          position: relative;
+          padding: 7px 0;
+          left: -5px;
+          top: 15px;
+          width: 120px;
+          background: #00CC00;
+          color: #fff;
+          -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+          -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3); }
+        .maincontent .list-container .list .item .ribbon-green:before, .maincontent .list-container .list .item .ribbon-green:after {
+          content: "";
+          border-top: 3px solid #6e8900;
+          border-left: 3px solid transparent;
+          border-right: 3px solid transparent;
+          position: absolute;
+          bottom: -3px; }
+        .maincontent .list-container .list .item .image {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 125px;
+          height: 125px;
+          border-radius: 25px;
+          border: 1px solid #2a2730;
+          overflow: hidden;
+          margin: auto;
+          text-align: center; }
           .maincontent .list-container .list .item .image .fa {
-            padding-top: 25%; }
+            color: #2a2730; }
+          .maincontent .list-container .list .item .image .fa:hover {
+            color: #2a2730;
+            text-decoration: none; }
         .maincontent .list-container .list .item .title {
           font-size: 17px;
-          text-align: center;
-          height: 70px; }
+          text-align: center; }
         .maincontent .list-container .list .item .platform-list {
           display: none;
           z-index: 99;
@@ -103,7 +158,7 @@ div.nav {
       margin-top: 15px;
       width: 1000px; }
   .maincontent .paginator {
-    position: fixed;
+    margin: auto;
     left: 0px;
     bottom: 0px;
     width: 100%;

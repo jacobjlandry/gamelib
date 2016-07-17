@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('auth.login');
+        return view('auth.login', ['resource' => 'user']);
     }
 
     public function home()
@@ -32,6 +32,16 @@ class UserController extends Controller
         else {
             return $this->login();
         }
+    }
+
+    public function register()
+    {
+        return view('auth.register', ['resource' => 'user']);
+    }
+
+    public function reset()
+    {
+        return view('auth.passwords.reset', ['resource' => 'user', 'token' => csrf_token()]);
     }
 
     public function games()

@@ -1,3 +1,6 @@
+@if(!isset($resource))
+    <?php $resource = 'user'; ?>
+@endif
 <html>
     <head>
         <title>Game Library</title>

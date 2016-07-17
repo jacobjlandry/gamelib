@@ -23,7 +23,7 @@
             </thead>
             <tr>
                 <td>Detail URL</td>
-                <td><a href="{{ $item->bomb_url }}">{{ $item->bomb_url }}</a></td>
+                <td><a href="{{ $item->detail_url }}">{{ $item->detail_url }}</a></td>
             </tr>
             <tr>
                 @if($resource == "games")

@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/login', 'UserController@login');
 Route::get('/', 'UserController@home');
+Route::auth();
+
+Route::get('/password/reset', 'UserController@reset');
 
 Route::get('list/{resource}/{page?}', function($resource, $page = 1) {
     $list = \App\GiantBomb::list($resource, $page);
