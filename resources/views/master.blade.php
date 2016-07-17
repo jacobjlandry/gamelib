@@ -54,15 +54,23 @@
             })
 
             $('.claim').on('click', function(e) {
+                e.preventDefault();
                 @if($resource == "games")
-                    $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').show();
-                    $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms li').on('click', function(e2) {
-                        $.get('/user/claim/{{ $resource }}/' + $(e.target).attr('id') + "/" + $(e2.target).attr('id'));
-                        $('#{{ $resource }}' + $(e.target).attr('id') + ' .fa').addClass('full');
+                    if($('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').css('display') != 'none') {
                         $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').hide();
-                    });
+                    }
+                    else {
+                        $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').show();
+                        $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms li').on('click', function(e2) {
+                            $.get('/user/claim/{{ $resource }}/' + $(e.target).attr('id') + "/" + $(e2.target).attr('id'));
+                            $('#' + $(e.target).attr('id') + 'Item .ribbon-wrapper-green').show();
+                            $('#{{ $resource }}' + $(e.target).attr('id') + 'Platforms').hide();
+                        });
+                    }
                 @else
-                    $.get('/user/claim/{{ $resource }}/' + $(e.target).attr('id'));
+                    $.get('/user/claim/{{ $resource }}/' + $(e.target).attr('id')).complete(function(data) {
+                        console.log('response');
+                    });
                     $('#{{ $resource }}' + $(e.target).attr('id') + ' .fa').addClass('full');
                 @endif
             });

@@ -11,7 +11,7 @@ class UserPlatform extends Model
 
     public function platform()
     {
-        return $this->hasOne('App\Platform', 'id', 'platform_id')->first();
+        return $this->hasOne('App\Platform', 'bomb_id', 'platform_id')->first();
     }
 
     public function user()

@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="filters-container">
-        <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">All</button>
+        <div class="btn-group btn-group-justified" role="group" aria-label="Platforms">
+            <a href="/user/games" class="btn btn-default @if(!$platformId) active @endif" role="button">All</a>
             @foreach(Auth::user()->platforms() as $platform)
-                <button type="button" class="btn btn-default">{{ $platform->platform()->name }}</button>
+                <a href="/user/games/{{ $platform->platform_id }}" class="btn btn-default @if($platformId == $platform->platform_id) active @endif" role="button">{{ $platform->platform()->name }}</a>
             @endforeach
         </div>
     </div>

@@ -178,12 +178,12 @@ div.nav {
           display: none;
           z-index: 99;
           background: #ffffff;
-          position: relative;
-          bottom: 0px;
-          right: 0px;
+          border: 1px solid #cccccc;
+          border-radius: 15px;
 
           ul {
             list-style: none;
+            padding: 10px;
             li:hover {
               background: #2a2730;
               color: #ffffff;

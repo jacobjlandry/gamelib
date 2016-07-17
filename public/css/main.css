@@ -141,11 +141,11 @@ div.nav {
           display: none;
           z-index: 99;
           background: #ffffff;
-          position: relative;
-          bottom: 0px;
-          right: 0px; }
+          border: 1px solid #cccccc;
+          border-radius: 15px; }
           .maincontent .list-container .list .item .platform-list ul {
-            list-style: none; }
+            list-style: none;
+            padding: 10px; }
             .maincontent .list-container .list .item .platform-list ul li:hover {
               background: #2a2730;
               color: #ffffff; }

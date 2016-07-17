@@ -44,9 +44,9 @@ class UserController extends Controller
         return view('auth.passwords.reset', ['resource' => 'user', 'token' => csrf_token()]);
     }
 
-    public function games()
+    public function games($platformId = null)
     {
-        $games = Auth::user()->games();
+        $games = Auth::user()->games($platformId);
         $list = array();
         foreach($games as $owned) {
             $game = \App\Game::where('bomb_id', $owned->game_id)->first();
@@ -56,6 +56,6 @@ class UserController extends Controller
 
         $list = collect($list);
 
-        return view('user.games', ['user' => Auth::user(), 'resource' => 'user', 'games' => $list]);
+        return view('user.games', ['user' => Auth::user(), 'resource' => 'user', 'games' => $list, 'platformId' => $platformId]);
     }
 }

@@ -82,4 +82,4 @@ Route::get('/user/claim/{resource}/{id}/{platformId?}', function($resource, $id,
     return Auth::user()->claim($resource, $id, $platformId);
 });
 
-Route::get('/user/games', 'UserController@games');
+Route::get('/user/games/{platformId?}', 'UserController@games');

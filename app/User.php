@@ -33,7 +33,16 @@ class User extends Authenticatable
      */
     public function has($resource, $id)
     {
-        return \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->first();
+        switch($resource) {
+            default:
+            case 'games':
+                return \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->first();
+                break;
+
+            case 'platforms':
+                return \App\UserPlatform::where('user_id', $this->id)->where('platform_id', $id)->first();
+                break;
+        }
     }
 
     /**
@@ -134,13 +143,18 @@ class User extends Authenticatable
                     }
                 }
                 $map = new \App\UserGame(['user_id' => $this->id, 'game_id' => $game->bomb_id, 'platform_id' => $platformId]);
+                $map->save();
+                if(!$this->has('platforms', $platformId)) {
+                    $platformMap = new \App\UserPlatform(['user_id' => $this->id, 'platform_id' => $platformId]);
+                    $platformMap->save();
+                }
                 break;
             case 'platforms':
                 $map = new \App\UserPlatform(['user_id' => $this->id, 'platform_id' => $id]);
+                $map->save();
                 break;
         }
 
-        $map->save();
         return $map->id;
     }
 
