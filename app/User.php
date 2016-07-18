@@ -103,12 +103,23 @@ class User extends Authenticatable
     }
 
     /**
+     * Return whether a game/platform combo is owned
+     *
+     * @param $gameId
+     * @return mixed
+     */
+    public function owned($gameId, $platformId)
+    {
+        return \App\UserGame::where('game_id', $gameId)->where('platform_id', $platformId)->get()->count();
+    }
+
+    /**
      * Claim Ownership of a Product
      *
      * @param $resource
      * @param $id
      */
-    public function claim($resource, $id, $platformId = null)
+    public function claim($resource, $id, $platformId)
     {
         switch($resource) {
             case 'games':
@@ -136,21 +147,22 @@ class User extends Authenticatable
                                 $platform->detail_url = $platformInfo->site_detail_url;
                                 $platform->save();
 
-                                $map = new \App\GamePlatform(['game_id' => $game->id, 'platform_id' => $platform->id]);
+                                // @todo this might not be working, hearthstone missed iOS
+                                $map = new \App\GamePlatform(['game_id' => $game->bomb_id, 'platform_id' => $platform->bomb_id]);
                                 $map->save();
                             }
                         }
                     }
                 }
-                $map = new \App\UserGame(['user_id' => $this->id, 'game_id' => $game->bomb_id, 'platform_id' => $platformId]);
+                $map = new \App\UserGame(['user_id' => $this->id, 'game_id' => $game->bomb_id, 'platform_id' => $platformId, 'own' => 1]);
                 $map->save();
                 if(!$this->has('platforms', $platformId)) {
-                    $platformMap = new \App\UserPlatform(['user_id' => $this->id, 'platform_id' => $platformId]);
+                    $platformMap = new \App\UserPlatform(['user_id' => $this->id, 'platform_id' => $platformId, 'own' => 1]);
                     $platformMap->save();
                 }
                 break;
             case 'platforms':
-                $map = new \App\UserPlatform(['user_id' => $this->id, 'platform_id' => $id]);
+                $map = new \App\UserPlatform(['user_id' => $this->id, 'platform_id' => $id, 'own' => 1]);
                 $map->save();
                 break;
         }

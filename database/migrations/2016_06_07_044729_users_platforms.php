@@ -17,6 +17,7 @@ class UsersPlatforms extends Migration
             $table->integer('user_id');
             $table->integer('platform_id');
             $table->integer('rating');
+            $table->boolean('own');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserPlatform extends Model
 {
-    public $fillable = array('user_id', 'platform_id');
+    public $fillable = array('user_id', 'platform_id', 'own');
     public $table = 'user_platform';
 
     public function platform()

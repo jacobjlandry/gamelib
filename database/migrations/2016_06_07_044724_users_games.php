@@ -21,6 +21,7 @@ class UsersGames extends Migration
             $table->boolean('played');
             $table->integer('beat');
             $table->integer('rating');
+            $table->boolean('own');
             $table->timestamps();
             $table->softDeletes();
         });

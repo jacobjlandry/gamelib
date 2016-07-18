@@ -10,8 +10,8 @@
                     <th colspan="2">
                         {{ $item->name }}
                         <div class="controls rating" style="display: inline; padding-left: 15px;">
-                            @for($x = 0; $x < 5; $x++)
-                                <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
+                            @for($x = 1; $x <= 5; $x++)
+                                <a href="#"><i id="star{{ $x }}" class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
                             @endfor
                         </div>
                         <div id="{{ $resource }}{{ $item->id }}" class="controls" style="float: right;">
@@ -29,9 +29,13 @@
                 @if($resource == "games")
                     <td>Platforms</td>
                     <td>
-                        @foreach($item->platforms() as $platform)
-                            {{ $platform->name }}<br />
-                        @endforeach
+                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                            @foreach($item->platforms() as $platform)
+                                <label class="btn btn-default @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id)) active @endif">
+                                    <input type="checkbox" autocomplete="off" checked> {{ $platform->platform()->name }}
+                                </label>
+                            @endforeach
+                        </div>
                     </td>
                 @elseif($resource == "platforms")
                     <td>Games</td>
@@ -42,6 +46,35 @@
                     </td>
                 @endif
             </tr>
+            @if($item->owned())
+                <tr>
+                    <td>Playing</td>
+                    <td>
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Platforms">
+                            <a href="#" class="btn btn-default @if($item->userGameInfo()->playing) active @endif" role="button">Yes</a>
+                            <a href="#" class="btn btn-default @if(!$item->userGameInfo()->playing) active @endif" role="button">No</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Played</td>
+                    <td>
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Platforms">
+                            <a href="#" class="btn btn-default @if($item->userGameInfo()->played) active @endif" role="button">Yes</a>
+                            <a href="#" class="btn btn-default @if(!$item->userGameInfo()->played) active @endif" role="button">No</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Beat</td>
+                    <td>
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Platforms">
+                            <a href="#" class="btn btn-default @if($item->userGameInfo()->beat) active @endif" role="button">Yes</a>
+                            <a href="#" class="btn btn-default @if(!$item->userGameInfo()->beat) active @endif" role="button">No</a>
+                        </div>
+                    </td>
+                </tr>
+            @endif
         </table>
     </div>
 @endsection
