@@ -147,14 +147,19 @@ class User extends Authenticatable
                                 $platform->detail_url = $platformInfo->site_detail_url;
                                 $platform->save();
 
-                                // @todo this might not be working, hearthstone missed iOS
                                 $map = new \App\GamePlatform(['game_id' => $game->bomb_id, 'platform_id' => $platform->bomb_id]);
                                 $map->save();
                             }
                         }
                     }
                 }
-                $map = new \App\UserGame(['user_id' => $this->id, 'game_id' => $game->bomb_id, 'platform_id' => $platformId, 'own' => 1]);
+                $map = \App\UserGame::where('user_id', $this->id)->where('game_id', $game->bomb_id)->where('platform_id', $platformId)->withTrashed()->first();
+                if(!is_object($map)) {
+                    $map = new \App\UserGame(['user_id' => $this->id, 'game_id' => $game->bomb_id, 'platform_id' => $platformId, 'own' => 1]);
+                }
+                else if($map->trashed()) {
+                    $map->restore();
+                }
                 $map->save();
                 if(!$this->has('platforms', $platformId)) {
                     $platformMap = new \App\UserPlatform(['user_id' => $this->id, 'platform_id' => $platformId, 'own' => 1]);
@@ -176,8 +181,50 @@ class User extends Authenticatable
      * @param $resource
      * @param $id
      */
-    public function toss($resource, $id)
+    public function toss($resource, $id, $platformId)
     {
+        if($resource == "games") {
+            $userGame = UserGame::where('platform_id', $platformId)->where('user_id', $this->id)->where('game_id', $id)->first();
+            $userGame->delete();
+        }
+        else {
 
+        }
+    }
+
+    public function playing($platformId, $gameId, $value)
+    {
+        $game = UserGame::where('user_id', $this->id)->where("game_id", $gameId)->where('platform_id', $platformId)->first();
+        if($value == "true" || $value == 1) {
+            $game->playing = 1;
+        }
+        else {
+            $game->playing = 0;
+        }
+        $game->save();
+    }
+
+    public function played($platformId, $gameId, $value)
+    {
+        $game = UserGame::where('user_id', $this->id)->where("game_id", $gameId)->where('platform_id', $platformId)->first();
+        if($value == "true" || $value == 1) {
+            $game->played = 1;
+        }
+        else {
+            $game->played = 0;
+        }
+        $game->save();
+    }
+
+    public function beat($platformId, $gameId, $value)
+    {
+        $game = UserGame::where('user_id', $this->id)->where("game_id", $gameId)->where('platform_id', $platformId)->first();
+        if($value == "true" || $value == 1) {
+            $game->beat = 1;
+        }
+        else {
+            $game->beat = 0;
+        }
+        $game->save();
     }
 }

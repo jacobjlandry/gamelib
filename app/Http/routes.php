@@ -17,7 +17,7 @@ Route::auth();
 Route::get('/password/reset', 'UserController@reset');
 
 Route::get('list/{resource}/{page?}', function($resource, $page = 1) {
-    $list = \App\GiantBomb::list($resource, $page);
+    $list = \App\GiantBomb::getList($resource, $page);
     
     return view('list', ['list' => $list->results,
         'max_results' => $list->number_of_total_results,
@@ -34,10 +34,10 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
             break;
         case 'games':
             $item = \App\Game::firstOrNew(['bomb_id' => $id]);
-            $details = \App\GiantBomb::item("game", $id);
+            $details = \App\GiantBomb::getItem("game", $id);
             if(!$item->exists) {
                 // Create Game
-                $details = \App\GiantBomb::item("game", $id);
+                $details = \App\GiantBomb::getItem("game", $id);
                 $item->name = $details->results->name;
                 $item->image = $details->results->image->super_url;
                 $item->bomb_url = $details->results->site_detail_url;
@@ -48,7 +48,7 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
                     $platform = \App\Platform::firstOrNew(['bomb_id' => $platformInfo->id]);
                     // Create Platform
                     if(!$platform->exists) {
-                        $platformDetails = \App\GiantBomb::item("platform", $platformInfo->id);
+                        $platformDetails = \App\GiantBomb::getItem("platform", $platformInfo->id);
                         $platform->name = $platformDetails->results->name;
                         $platform->image = $platformDetails->results->image->super_url;
                         $platform->bomb_url = $platformDetails->results->site_detail_url;
@@ -67,6 +67,16 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
     return view('basic', ['item' => $item, 'resource' => $resource]);
 });
 
+Route::get('game/playing/{platformId}/{gameId}/{value}', function($platformId, $gameId, $value) {
+    Auth::user()->playing($platformId, $gameId, $value);
+});
+Route::get('game/played/{platformId}/{gameId}/{value}', function($platformId, $gameId, $value) {
+    Auth::user()->played($platformId, $gameId, $value);
+});
+Route::get('game/beat/{platformId}/{gameId}/{value}', function($platformId, $gameId, $value) {
+    Auth::user()->beat($platformId, $gameId, $value);
+});
+
 Route::get('/search/{term}', function($term) {
     $list = \App\Giantbomb::search($term);
 
@@ -80,6 +90,9 @@ Route::get('/search/{term}', function($term) {
 
 Route::get('/user/claim/{resource}/{id}/{platformId?}', function($resource, $id, $platformId = null) {
     return Auth::user()->claim($resource, $id, $platformId);
+});
+Route::get('/user/toss/{resource}/{id}/{platformId?}', function($resource, $id, $platformId = null) {
+    return Auth::user()->toss($resource, $id, $platformId);
 });
 
 Route::get('/user/games/{platformId?}', 'UserController@games');

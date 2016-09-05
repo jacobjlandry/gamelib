@@ -19,8 +19,8 @@ class Game extends Model
         return $this->hasMany('App\UserGame', 'game_id', 'bomb_id')->where('user_id', Auth::user()->id)->first()->own;
     }
 
-    public function userGameInfo()
+    public function userGameInfo($platformId)
     {
-        return $this->hasMany('App\UserGame', 'game_id', 'bomb_id')->where('user_id', Auth::user()->id)->first();
+        return $this->hasMany('App\UserGame', 'game_id', 'bomb_id')->where('platform_id', $platformId)->where('user_id', Auth::user()->id)->first();
     }
 }

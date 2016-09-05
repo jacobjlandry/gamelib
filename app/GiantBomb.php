@@ -7,28 +7,23 @@ use Log;
 
 class GiantBomb extends Model
 {
-    const baseURL = 'http://www.giantbomb.com/api/';
-    const baseURI = array('api_key' => '743dedd31e502fa9e4fc17531182b7bab3802ab7','format' => 'json');
-
-    public static function list($resource, $page)
+    public static function getList($resource, $page)
     {
         ini_set("user_agent","Games Library");
-        $params = array_merge(self::baseURI, array('offset' => ($page-1)*100));
-        return json_decode(file_get_contents(self::baseURL . $resource . '?' . http_build_query($params)));
+        $params = array_merge(array('api_key' => env('BOMB_KEY'),'format' => 'json'), array('offset' => ($page-1)*100));
+        return json_decode(file_get_contents(env('BOMB_URL') . $resource . '?' . http_build_query($params)));
     }
 
     public static function search($term)
     {
         ini_set("user_agent","Games Library");
-        //Log::debug("GiantBomb API Query", array(self::baseURL . "search" . self::baseURI . "&query=" . $term));
-        $params = array_merge(self::baseURI, array('query' => $term, 'resources' => 'game'));
-        return json_decode(file_get_contents(self::baseURL . "search?" . http_build_query($params)));
+        $params = array_merge(array('api_key' => env('BOMB_KEY'),'format' => 'json'), array('query' => $term, 'resources' => 'game'));
+        return json_decode(file_get_contents(env('BOMB_URL') . "search?" . http_build_query($params)));
     }
 
-    public static function item($resource, $id)
+    public static function getItem($resource, $id)
     {
         ini_set("user_agent","Games Library");
-        //Log::debug('GiantBomb API Call', array(self::baseURL, $resource, $id, self::baseURI));
-        return json_decode(file_get_contents(self::baseURL . $resource . "/" . $id . '?' . http_build_query(self::baseURI)));
+        return json_decode(file_get_contents(env('BOMB_URL') . $resource . "/" . $id . '?' . http_build_query(array('api_key' => env('BOMB_KEY'),'format' => 'json'))));
     }
 }
