@@ -16,7 +16,13 @@ class Game extends Model
 
     public function owned()
     {
-        return $this->hasMany('App\UserGame', 'game_id', 'bomb_id')->where('user_id', Auth::user()->id)->first()->own;
+        $userGame = $this->hasMany('App\UserGame', 'game_id', 'bomb_id')->where('user_id', Auth::user()->id)->first();
+        if(is_object($userGame)) {
+            return $userGame->own;
+        }
+        else {
+            return false;
+        }
     }
 
     public function userGameInfo($platformId)

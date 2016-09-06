@@ -95,4 +95,8 @@ Route::get('/user/toss/{resource}/{id}/{platformId?}', function($resource, $id, 
     return Auth::user()->toss($resource, $id, $platformId);
 });
 
+Route::get('/user/rate/{resource}/{id}/{rating}/{platformId?}', function($resource, $id, $rating, $platformId = null) {
+    return Auth::user()->rate($resource, $id, $rating, $platformId);
+});
+
 Route::get('/user/games/{platformId?}', 'UserController@games');

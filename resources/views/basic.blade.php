@@ -11,7 +11,7 @@
                         {{ $item->name }}
                         <div class="controls rating" style="display: inline; padding-left: 15px;">
                             @for($x = 1; $x <= 5; $x++)
-                                <a href="#"><i id="star{{ $x }}" class="fa {{ Auth::user()->littleRating($resource, $item->id) }} rating-star"></i></a>
+                                <a href="#"><i id="star{{ $x }}" class="fa {{ Auth::user()->littleRating($resource, $item->bomb_id, $x) }} rating-star @if($x <= Auth::user()->rating($resource, $item->bomb_id)) full @endif"></i></a>
                             @endfor
                         </div>
                     </th>
@@ -113,6 +113,8 @@
 
             // star rating
             $('.rating-star').on('mouseover', function(e) {
+                $('.rating-star').removeClass('fa-star');
+                $('.rating-star').addClass('fa-star-o');
                 var star = $(e.target).attr('id').replace(/star/, '');
                 for(var x = star; x > 0; x--) {
                     $('#star' + x).removeClass('fa-star-o');
@@ -122,6 +124,19 @@
             $('.rating-star').on('mouseout', function(e) {
                 $('.rating-star').removeClass('fa-star');
                 $('.rating-star').addClass('fa-star-o');
+                $('.rating-star.full').addClass('fa-star');
+                $('.rating-star.full').removeClass('fa-star-o');
+            });
+            $('.rating-star').on('click', function(e) {
+                e.preventDefault();
+                var star = $(e.target).attr('id').replace(/star/, '');
+                $.get('/user/rate/games/{{ $item->bomb_id }}/' + star);
+
+                $('.rating-star').removeClass('full');
+                var star = $(e.target).attr('id').replace(/star/, '');
+                for(var x = star; x > 0; x--) {
+                    $('#star' + x).addClass('full');
+                }
             });
         });
     </script>

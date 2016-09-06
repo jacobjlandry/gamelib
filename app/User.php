@@ -52,8 +52,13 @@ class User extends Authenticatable
      * @param $id
      * @return string
      */
-    public function littleRating($resource, $id)
+    public function littleRating($resource, $id, $number)
     {
+        $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->first();
+        if(is_object($userGames) && $userGames->rating >= $number) {
+            return "fa-star";
+        }
+
         return "fa-star-o";
     }
 
@@ -66,19 +71,33 @@ class User extends Authenticatable
      */
     public function rating($resource, $id)
     {
+        $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->first();
+
+        if(is_object($userGames)) {
+            return $userGames->rating;
+        }
+
         return false;
     }
 
     /**
      * Rate a product
      *
+     * @TODO add platform rating support instead of game only
+     *
      * @param $resource
      * @param $id
      * @param $rating
      */
-    public function rate($resource, $id, $rating)
+    public function rate($resource, $id, $rating, $platformId = null)
     {
-
+        if(!$platformId) {
+            $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->get();
+            foreach($userGames as $userGame) {
+                $userGame->rating = $rating;
+                $userGame->save();
+            }
+        }
     }
 
     /**
