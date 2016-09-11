@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/', 'UserController@home');
 Route::auth();
+
+Route::get('/', 'UserController@home');
+Route::get('/home', 'HomeController@index');
 
 Route::get('/password/reset', 'UserController@reset');
 
@@ -100,3 +102,7 @@ Route::get('/user/rate/{resource}/{id}/{rating}/{platformId?}', function($resour
 });
 
 Route::get('/user/games/{platformId?}', 'UserController@games');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
