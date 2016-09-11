@@ -52,7 +52,7 @@ class User extends Authenticatable
      * @param $id
      * @return string
      */
-    public function littleRating($resource, $id, $number)
+    public function littleRating($resource, $id, $number = 1)
     {
         $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->first();
         if(is_object($userGames) && $userGames->rating >= $number) {
@@ -144,7 +144,7 @@ class User extends Authenticatable
             case 'games':
                 $game = \App\Game::where('bomb_id', $id)->first();
                 if(!is_object($game)) {
-                    $gameInfo = \App\GiantBomb::item('game', $id)->results;
+                    $gameInfo = \App\GiantBomb::getItem('game', $id)->results;
                     $game = new \App\Game();
                     $game->bomb_id = $id;
                     $game->name = $gameInfo->name;
@@ -157,7 +157,7 @@ class User extends Authenticatable
                         foreach($gameInfo->platforms as $platformInfo) {
                             $platform = \App\Platform::where('bomb_id', $platformInfo->id)->first();
                             if(!is_object($platform)) {
-                                $platformInfo = \App\GiantBomb::item('platform', $platformInfo->id)->results;
+                                $platformInfo = \App\GiantBomb::getItem('platform', $platformInfo->id)->results;
                                 $platform = new \App\Platform();
                                 $platform->bomb_id = $platformInfo->id;
                                 $platform->name = $platformInfo->name;
