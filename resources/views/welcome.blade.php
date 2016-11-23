@@ -16,7 +16,7 @@
                 <div class="panel-heading">My Games</div>
                 <div class="panel-body">
                     <div id="uniqueGames"><div class="number">{{ $games->unique('game_id')->count()  }}</div><div class="descriptor">Unique Games</div></div>
-                    <div id="gamesPlayed"><div class="number">{{ $games->where('played', 1)->count() }}/{{ $games->where('played', 0)->count() }}</div><div class="descriptor">Played/Unplayed</div></div>
+                    <div id="gamesPlayed"><div class="number"><a href="/user/games?played=1">{{ $games->where('played', 1)->count() }}</a>/<a href="/user/games?played=0">{{ $games->where('played', 0)->count() }}</a></div><div class="descriptor">Played/Unplayed</div></div>
                     <div id="gamesBeat"><div class="number">{{ $games->where('beat', 1)->count() }}/{{ $games->where('beat', 0)->count() }}</div> <div class="descriptor">Beat/Unbeat</div></div>
                 </div>
             </div>

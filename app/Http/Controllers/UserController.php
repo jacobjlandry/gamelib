@@ -44,9 +44,18 @@ class UserController extends Controller
         return view('auth.passwords.reset', ['resource' => 'user', 'token' => csrf_token()]);
     }
 
-    public function games($platformId = null)
+    public function games(Request $request, $platformId = null)
     {
         $games = Auth::user()->games($platformId);
+
+        // gather played/unplayed if needed
+        if($request->input('played') == 1) {
+            $games = $games->where('played', 1);
+        }
+        else if($request->input('played') == '0') {
+            $games = $games->where('played', 0);
+        }
+
         $list = array();
         foreach($games as $owned) {
             $game = \App\Game::where('bomb_id', $owned->game_id)->first();
