@@ -18,4 +18,9 @@ class UserPlatform extends Model
     {
         return $this->hasOne('App\User', 'id', 'user_id')->first();
     }
+
+    public function games()
+    {
+        return $this->hasMany('App\UserGame', 'platform_id', 'platform_id');
+    }
 }

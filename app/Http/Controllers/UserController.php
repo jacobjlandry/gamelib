@@ -58,4 +58,10 @@ class UserController extends Controller
 
         return view('user.games', ['user' => Auth::user(), 'resource' => 'user', 'games' => $list, 'platformId' => $platformId]);
     }
+
+    public function platforms()
+    {
+        $list = Auth::user()->platforms();
+        return view('user.platforms', ['user' => Auth::user(), 'resource' => 'user', 'platforms' => $list]);
+    }
 }

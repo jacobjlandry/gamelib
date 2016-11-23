@@ -102,6 +102,7 @@ Route::get('/user/rate/{resource}/{id}/{rating}/{platformId?}', function($resour
 });
 
 Route::get('/user/games/{platformId?}', 'UserController@games');
+Route::get('/user/platforms', 'UserController@platforms');
 
 Route::auth();
 

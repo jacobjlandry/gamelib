@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     <div id="platformChart"></div>
                     <div id="gamesCount"><div class="number"><a href="user/games">{{ $games->count() }}</a></div> <div class="descriptor">Total Games</div></div>
-                    <div id="platformCount"><div class="number">{{ $platforms->count() }}</div> <div class="descriptor">Platforms</div></div>
+                    <div id="platformCount"><div class="number"><a href="user/platforms">{{ $platforms->count() }}</a></div> <div class="descriptor">Platforms</div></div>
                 </div>
             </div>
             <div class="panel panel-success">
