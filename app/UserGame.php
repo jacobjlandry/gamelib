@@ -11,4 +11,9 @@ class UserGame extends Model
 
     public $fillable = array('user_id', 'game_id', 'platform_id', 'own');
     public $table = 'user_game';
+
+    public function game()
+    {
+        return \App\Game::where('bomb_id', $this->game_id)->first();
+    }
 }

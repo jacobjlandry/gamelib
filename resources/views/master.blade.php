@@ -15,12 +15,10 @@
     </head>
     <body>
         <div class="nav">
-            <ul class="nav">
-                <li class="@if($resource == "platforms")active @endif"><a href="/list/platforms"><i class="fa fa-plug fa-4x"></i></a></li>
-                <li class="@if($resource == "games")active @endif"><a href="/list/games"><i class="fa fa-gamepad fa-4x"></i></a></li>
-                <li class="@if($resource == "user")active @endif"><a href="/"><i class="fa fa-user fa-4x"></i></a></li>
-                <li><div class="searchbar" id="searchbar"><input type="text" id="term" /><a id="search" href="#"><i class="fa fa-search fa-4x"></i></a></div></li>
-            </ul>
+            <div class="item @if($resource == "platforms")active @endif"><a href="/list/platforms"><i class="fa fa-plug fa-4x"></i></a></div>
+            <div class="item @if($resource == "games")active @endif"><a href="/list/games"><i class="fa fa-gamepad fa-4x"></i></a></div>
+            <div class="item @if($resource == "user")active @endif"><a href="/"><i class="fa fa-user fa-4x"></i></a></div>
+            <div class="item"><div class="searchbar" id="searchbar"><input type="text" id="term" /><a id="search" href="#"><i class="fa fa-search fa-4x"></i></a></div></div>
         </div>
         <div class="maincontent">
             @yield('content')
