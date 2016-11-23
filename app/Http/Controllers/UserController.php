@@ -49,6 +49,7 @@ class UserController extends Controller
         $games = Auth::user()->games($platformId);
 
         // gather played/unplayed if needed
+        // @TODO put this in session for when user goes or clicks on a platform?
         if($request->input('played') == 1) {
             $games = $games->where('played', 1);
         }
