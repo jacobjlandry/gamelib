@@ -162,12 +162,17 @@ body {
     text-align: center; }
     .maincontent .paginator nav {
       margin: auto; }
-  .maincontent .welcome .panel-body {
+  .maincontent .welcome .graph-panel {
     height: 400px; }
   .maincontent .welcome #platformChart {
     position: absolute;
     left: 0px;
     top: 50px; }
+  .maincontent .welcome .user-stat {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center; }
   .maincontent .welcome .number {
     display: inline-block;
     color: #1976D2;
@@ -175,6 +180,15 @@ body {
     width: 150px;
     text-align: center; }
   .maincontent .welcome .number a:hover {
+    color: #1976D2;
+    text-decoration: none; }
+  .maincontent .welcome .detail {
+    display: inline-block;
+    color: #1976D2;
+    font-size: 18px;
+    width: 150px;
+    text-align: center; }
+  .maincontent .welcome .detail a:hover {
     color: #1976D2;
     text-decoration: none; }
   .maincontent .welcome .descriptor {

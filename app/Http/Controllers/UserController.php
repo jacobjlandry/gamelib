@@ -57,6 +57,26 @@ class UserController extends Controller
             $games = $games->where('played', 0);
         }
 
+        // get beat/unbeat games
+        // @TODO put this in session for when user goes or clicks on a platform?
+        if($request->input('beat') == 1) {
+            $games = $games->where('beat', 1);
+        }
+        else if($request->input('beat') == '0') {
+            $games = $games->where('beat', 0);
+        }
+
+        // get rated/unrated games
+        // @TODO put this in session for when user goes or clicks on a platform?
+        if($request->input('rated') == 1) {
+            $games = $games->filter(function($value, $key) {
+                return $value->rating > 0;
+            });
+        }
+        else if($request->input('rated') == '0') {
+            $games = $games->where('rating', 0);
+        }
+
         $list = array();
         foreach($games as $owned) {
             $game = \App\Game::where('bomb_id', $owned->game_id)->first();

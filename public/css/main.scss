@@ -225,7 +225,7 @@ body {
   }
 
   .welcome {
-    .panel-body {
+    .graph-panel {
       height: 400px;
     }
 
@@ -233,6 +233,13 @@ body {
       position: absolute;
       left: 0px;
       top: 50px;
+    }
+
+    .user-stat {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
     }
 
     .number {
@@ -243,6 +250,17 @@ body {
       text-align: center;
     }
     .number a:hover {
+      color: #1976D2;
+      text-decoration: none;
+    }
+    .detail {
+      display: inline-block;
+      color: #1976D2;
+      font-size: 18px;
+      width: 150px;
+      text-align: center;
+    }
+    .detail a:hover {
       color: #1976D2;
       text-decoration: none;
     }
