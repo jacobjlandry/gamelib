@@ -4,6 +4,12 @@ body {
 .maincontent {
   margin-bottom: 50px; }
 
+.footer {
+  padding: 5px;
+  position: fixed;
+  bottom: 0px;
+  right: 0px; }
+
 .nav {
   position: fixed;
   left: 0px;

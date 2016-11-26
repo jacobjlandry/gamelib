@@ -23,6 +23,9 @@
         <div class="maincontent">
             @yield('content')
         </div>
+        <div class="footer">
+            <i class="fa fa-bomb"> Data Powered by the <a href="http://giantbomb.com">Giant Bomb</a> API</i>
+        </div>
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {
