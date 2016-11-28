@@ -80,7 +80,7 @@ Route::get('game/beat/{platformId}/{gameId}/{value}', function($platformId, $gam
 });
 
 Route::get('/search/{term}', function($term) {
-    $list = \App\Giantbomb::search($term);
+    $list = \App\GiantBomb::search($term);
 
     return view('list', ['list' => $list->results,
         'max_results' => $list->number_of_total_results,
