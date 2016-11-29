@@ -247,34 +247,40 @@ body {
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-    }
 
-    .number {
-      display: inline-block;
-      color: #1976D2;
-      font-size: 84px;
-      width: 150px;
-      text-align: center;
-    }
-    .number a:hover {
-      color: #1976D2;
-      text-decoration: none;
-    }
-    .detail {
-      display: inline-block;
-      color: #1976D2;
-      font-size: 18px;
-      width: 150px;
-      text-align: center;
-    }
-    .detail a:hover {
-      color: #1976D2;
-      text-decoration: none;
-    }
-    .descriptor {
-      display: inline;
-      font-size: 45px;
-      padding-left: 50px;
+      .number {
+        display: inline-block;
+        color: #1976D2;
+        font-size: 84px;
+        text-align: center;
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+      }
+      .number a:hover {
+        color: #1976D2;
+        text-decoration: none;
+      }
+      .detail {
+        display: inline-block;
+        color: #1976D2;
+        font-size: 18px;
+        width: 150px;
+        text-align: center;
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+      }
+      .detail a:hover {
+        color: #1976D2;
+        text-decoration: none;
+      }
+      .descriptor {
+        display: inline;
+        font-size: 45px;
+        padding-left: 50px;
+        flex-grow: 1;
+      }
     }
 
     #gamesCount {

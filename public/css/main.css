@@ -179,28 +179,34 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center; }
-  .maincontent .welcome .number {
-    display: inline-block;
-    color: #1976D2;
-    font-size: 84px;
-    width: 150px;
-    text-align: center; }
-  .maincontent .welcome .number a:hover {
-    color: #1976D2;
-    text-decoration: none; }
-  .maincontent .welcome .detail {
-    display: inline-block;
-    color: #1976D2;
-    font-size: 18px;
-    width: 150px;
-    text-align: center; }
-  .maincontent .welcome .detail a:hover {
-    color: #1976D2;
-    text-decoration: none; }
-  .maincontent .welcome .descriptor {
-    display: inline;
-    font-size: 45px;
-    padding-left: 50px; }
+    .maincontent .welcome .user-stat .number {
+      display: inline-block;
+      color: #1976D2;
+      font-size: 84px;
+      text-align: center;
+      width: 200px;
+      min-width: 200px;
+      max-width: 200px; }
+    .maincontent .welcome .user-stat .number a:hover {
+      color: #1976D2;
+      text-decoration: none; }
+    .maincontent .welcome .user-stat .detail {
+      display: inline-block;
+      color: #1976D2;
+      font-size: 18px;
+      width: 150px;
+      text-align: center;
+      width: 200px;
+      min-width: 200px;
+      max-width: 200px; }
+    .maincontent .welcome .user-stat .detail a:hover {
+      color: #1976D2;
+      text-decoration: none; }
+    .maincontent .welcome .user-stat .descriptor {
+      display: inline;
+      font-size: 45px;
+      padding-left: 50px;
+      flex-grow: 1; }
   .maincontent .welcome #gamesCount {
     position: absolute;
     left: 480px;
