@@ -36,7 +36,6 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
             break;
         case 'games':
             $item = \App\Game::firstOrNew(['bomb_id' => $id]);
-            $details = \App\GiantBomb::getItem("game", $id);
             if(!$item->exists) {
                 // Create Game
                 $details = \App\GiantBomb::getItem("game", $id);
