@@ -14,11 +14,6 @@
                             @endif
                         </div>
                     </a>
-                    <div id="{{ $item->id }}" class="controls">
-                        <a href="#"><i class="toss fa fa-minus-circle" id="{{ $item->id }}"></i></a>
-                        <a href="#"><i class="fa {{ Auth::user()->littleRating($resource, $item->id) }}"></i></a>
-                        <a href="#"><i class="claim fa fa-plus-circle" id="{{ $item->id }}"></i></a>
-                    </div>
                     <div id="{{ $resource }}{{ $item->id }}Platforms" class="platform-list">
                         @if(isset($item->platforms) && is_array($item->platforms))
                             <ul>
