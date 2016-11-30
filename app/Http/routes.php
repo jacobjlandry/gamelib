@@ -33,12 +33,13 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
     switch($resource) {
         case 'platforms':
             $item = \App\Platform::firstOrNew(['bomb_id' => $id]);
-            $details = \App\GiantBomb::getItem("platform", $id);
             if(!$item->exists) {
+                $details = \App\GiantBomb::getItem("platform", $id);
                 $item->name = $details->results->name;
                 $item->image = $details->results->image->super_url;
                 $item->bomb_url = $details->results->site_detail_url;
                 $item->detail_url = $details->results->api_detail_url;
+                $item->nickname = $details->results->abbreviation;
                 $item->save();
             }
             break;

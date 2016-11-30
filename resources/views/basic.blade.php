@@ -27,8 +27,8 @@
                     <td>
                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                             @foreach($item->platforms() as $platform)
-                                <label class="btn btn-default @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id)) active @endif platform">
-                                    <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id)) checked @endif> {{ $platform->platform()->name }}
+                                <label class="btn btn-default @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id)) active @endif platform" title="{{ $platform->platform()->name }}">
+                                    <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id)) checked @endif> {{ $platform->platform()->nickname }}
                                 </label>
                             @endforeach
                         </div>
@@ -42,8 +42,8 @@
                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                             @foreach($item->platforms() as $platform)
                                 @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id))
-                                    <label class="btn btn-default @if($item->userGameInfo($platform->platform()->bomb_id)->playing) active @endif playing">
-                                        <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if($item->userGameInfo($platform->platform()->bomb_id)->playing) checked @endif> {{ $platform->platform()->name }}
+                                    <label class="btn btn-default @if($item->userGameInfo($platform->platform()->bomb_id)->playing) active @endif playing" title="{{ $platform->platform()->name }}">
+                                        <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if($item->userGameInfo($platform->platform()->bomb_id)->playing) checked @endif> {{ $platform->platform()->nickname }}
                                     </label>
                                 @endif
                             @endforeach
@@ -56,8 +56,8 @@
                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                             @foreach($item->platforms() as $platform)
                                 @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id))
-                                    <label class="btn btn-default @if($item->userGameInfo($platform->platform()->bomb_id)->played) active @endif played">
-                                        <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if($item->userGameInfo($platform->platform()->bomb_id)->played) checked @endif> {{ $platform->platform()->name }}
+                                    <label class="btn btn-default @if($item->userGameInfo($platform->platform()->bomb_id)->played) active @endif played" title="{{ $platform->platform()->name }}">
+                                        <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if($item->userGameInfo($platform->platform()->bomb_id)->played) checked @endif> {{ $platform->platform()->nickname }}
                                     </label>
                                 @endif
                             @endforeach
@@ -70,8 +70,8 @@
                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                             @foreach($item->platforms() as $platform)
                                 @if(Auth::user()->owned($item->bomb_id, $platform->platform()->bomb_id))
-                                    <label class="btn btn-default @if($item->userGameInfo($platform->platform()->bomb_id)->beat) active @endif beat">
-                                        <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if($item->userGameInfo($platform->platform()->bomb_id)->beat) checked @endif> {{ $platform->platform()->name }}
+                                    <label class="btn btn-default @if($item->userGameInfo($platform->platform()->bomb_id)->beat) active @endif beat" title="{{ $platform->platform()->name }}">
+                                        <input type="checkbox" autocomplete="off" value="{{ $platform->platform()->bomb_id }}" @if($item->userGameInfo($platform->platform()->bomb_id)->beat) checked @endif> {{ $platform->platform()->nickname }}
                                     </label>
                                 @endif
                             @endforeach
