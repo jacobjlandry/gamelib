@@ -65,7 +65,7 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
                         $platform->image = $platformDetails->results->image->super_url;
                         $platform->bomb_url = $platformDetails->results->site_detail_url;
                         $platform->detail_url = $platformDetails->results->api_detail_url;
-                        $item->nickname = $details->results->abbreviation;
+                        $platform->nickname = $platformDetails->results->abbreviation;
                         $platform->save();
                     }
 
