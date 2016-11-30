@@ -36,31 +36,30 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
             break;
         case 'games':
             $item = \App\Game::firstOrNew(['bomb_id' => $id]);
+            $details = \App\GiantBomb::getItem("game", $id);
             if(!$item->exists) {
                 // Create Game
-                $details = \App\GiantBomb::getItem("game", $id);
                 $item->name = $details->results->name;
                 $item->image = $details->results->image->super_url;
                 $item->bomb_url = $details->results->site_detail_url;
                 $item->detail_url = $details->results->api_detail_url;
                 $item->save();
+            }
 
-                foreach($details->results->platforms as $platformInfo) {
-                    $platform = \App\Platform::firstOrNew(['bomb_id' => $platformInfo->id]);
-                    // Create Platform
-                    if(!$platform->exists) {
-                        $platformDetails = \App\GiantBomb::getItem("platform", $platformInfo->id);
-                        $platform->name = $platformDetails->results->name;
-                        $platform->image = $platformDetails->results->image->super_url;
-                        $platform->bomb_url = $platformDetails->results->site_detail_url;
-                        $platform->detail_url = $platformDetails->results->api_detail_url;
-                        $platform->save();
-                    }
-
-                    // Map Game to Platform
-                    DB::table('game_platform')->insert(['game_id' => $item->bomb_id, 'platform_id' => $platform->bomb_id,
-                        'created_at' => date('Y-m-d H:i:s', time()), 'updated_at' => date('Y-m-d H:i:s', time())]);
+            foreach($details->results->platforms as $platformInfo) {
+                $platform = \App\Platform::firstOrNew(['bomb_id' => $platformInfo->id]);
+                // Create Platform
+                if(!$platform->exists) {
+                    $platformDetails = \App\GiantBomb::getItem("platform", $platformInfo->id);
+                    $platform->name = $platformDetails->results->name;
+                    $platform->image = $platformDetails->results->image->super_url;
+                    $platform->bomb_url = $platformDetails->results->site_detail_url;
+                    $platform->detail_url = $platformDetails->results->api_detail_url;
+                    $platform->save();
                 }
+
+                // Map Game to Platform
+                $map = \App\GamePlatform::firstOrCreate(['game_id' => $item->bomb_id, 'platform_id' => $platform->bomb_id]);
             }
             break;
     }
