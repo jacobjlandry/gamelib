@@ -232,6 +232,9 @@ body {
   }
 
   .welcome {
+    .panel-heading {
+      font-size: 45px;
+    }
     .graph-panel {
       display: flex;
       justify-content: center;

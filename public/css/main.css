@@ -168,6 +168,8 @@ body {
     text-align: center; }
     .maincontent .paginator nav {
       margin: auto; }
+  .maincontent .welcome .panel-heading {
+    font-size: 45; }
   .maincontent .welcome .graph-panel {
     display: flex;
     justify-content: center; }
