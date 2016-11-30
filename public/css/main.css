@@ -169,52 +169,30 @@ body {
     .maincontent .paginator nav {
       margin: auto; }
   .maincontent .welcome .graph-panel {
-    height: 400px; }
-  .maincontent .welcome #platformChart {
-    position: absolute;
-    left: 0px;
-    top: 50px; }
+    display: flex;
+    justify-content: center; }
   .maincontent .welcome .user-stat {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center; }
     .maincontent .welcome .user-stat .number {
-      display: inline-block;
       color: #1976D2;
       font-size: 84px;
-      text-align: center;
-      width: 200px;
-      min-width: 200px;
-      max-width: 200px; }
+      text-align: center; }
     .maincontent .welcome .user-stat .number a:hover {
       color: #1976D2;
       text-decoration: none; }
     .maincontent .welcome .user-stat .detail {
-      display: inline-block;
       color: #1976D2;
       font-size: 18px;
       width: 150px;
-      text-align: center;
-      width: 200px;
-      min-width: 200px;
-      max-width: 200px; }
+      text-align: center; }
     .maincontent .welcome .user-stat .detail a:hover {
       color: #1976D2;
       text-decoration: none; }
     .maincontent .welcome .user-stat .descriptor {
-      display: inline;
-      font-size: 45px;
-      padding-left: 50px;
-      flex-grow: 1; }
-  .maincontent .welcome #gamesCount {
-    position: absolute;
-    left: 480px;
-    top: 50px; }
-  .maincontent .welcome #platformCount {
-    position: absolute;
-    left: 480px;
-    top: 200px; }
+      font-size: 45px; }
   .maincontent .filters-container {
     margin-bottom: 15px; }
     .maincontent .filters-container .user-game-controls {
