@@ -54,7 +54,7 @@ class UserController extends Controller
             $games = $games->where('played', 1);
         }
         else if($request->input('played') == '0') {
-            $games = $games->where('played', '0');
+            $games = $games->where('played', 0);
         }
 
         // get beat/unbeat games
@@ -63,7 +63,7 @@ class UserController extends Controller
             $games = $games->where('beat', 1);
         }
         else if($request->input('beat') == '0') {
-            $games = $games->where('beat', '0');
+            $games = $games->where('beat', 0);
         }
 
         // get rated/unrated games
