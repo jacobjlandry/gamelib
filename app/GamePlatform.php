@@ -13,4 +13,9 @@ class GamePlatform extends Model
     {
         return $this->hasOne('App\Platform', 'bomb_id', 'platform_id')->first();
     }
+
+    public function game()
+    {
+        return $this->hasOne('App\Game', 'bomb_id', 'game_id')->first();
+    }
 }

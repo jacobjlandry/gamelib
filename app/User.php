@@ -54,9 +54,20 @@ class User extends Authenticatable
      */
     public function littleRating($resource, $id, $number = 1)
     {
-        $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->first();
-        if(is_object($userGames) && $userGames->rating >= $number) {
-            return "fa-star";
+        switch($resource) {
+            case 'games':
+                $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->first();
+                if(is_object($userGames) && $userGames->rating >= $number) {
+                    return "fa-star";
+                }
+                break;
+
+            case 'platforms':
+                $userPlatforms = \App\UserPlatform::where('user_id', $this->id)->where('platform_id', $id)->first();
+                if(is_object($userPlatforms) && $userPlatforms->rating >= $number) {
+                    return "fa-star";
+                }
+                break;
         }
 
         return "fa-star-o";
@@ -83,20 +94,28 @@ class User extends Authenticatable
     /**
      * Rate a product
      *
-     * @TODO add platform rating support instead of game only
-     *
      * @param $resource
      * @param $id
      * @param $rating
      */
-    public function rate($resource, $id, $rating, $platformId = null)
+    public function rate($resource, $id, $rating)
     {
-        if(!$platformId) {
-            $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->get();
-            foreach($userGames as $userGame) {
-                $userGame->rating = $rating;
-                $userGame->save();
-            }
+        switch($resource) {
+            case 'games':
+                $userGames = \App\UserGame::where('user_id', $this->id)->where('game_id', $id)->get();
+                foreach($userGames as $userGame) {
+                    $userGame->rating = $rating;
+                    $userGame->save();
+                }
+                break;
+
+            case 'platforms':
+                $userPlatforms = \App\UserPlatform::where('user_id', $this->id)->where('platform_id', $id)->get();
+                foreach($userPlatforms as $userPlatform) {
+                    $userPlatform->rating = $rating;
+                    $userPlatform->save();
+                }
+                break;
         }
     }
 

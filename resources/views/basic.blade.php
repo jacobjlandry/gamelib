@@ -19,7 +19,7 @@
             </thead>
             <tr>
                 <td>Detail URL</td>
-                <td><a href="{{ $item->detail_url }}">{{ $item->detail_url }}</a></td>
+                <td><a href="{{ $item->bomb_url }}">{{ $item->bomb_url }}</a></td>
             </tr>
             <tr>
                 @if($resource == "games")
@@ -33,16 +33,9 @@
                             @endforeach
                         </div>
                     </td>
-                @elseif($resource == "platforms")
-                    <td>Games</td>
-                    <td>
-                        @foreach($item->games() as $game)
-                            {{ $game->name }}<br />
-                        @endforeach
-                    </td>
                 @endif
             </tr>
-            @if($item->owned())
+            @if($item->owned() && $resource == "games")
                 <tr>
                     <td>Playing</td>
                     <td>
@@ -130,7 +123,11 @@
             $('.rating-star').on('click', function(e) {
                 e.preventDefault();
                 var star = $(e.target).attr('id').replace(/star/, '');
-                $.get('/user/rate/games/{{ $item->bomb_id }}/' + star);
+                @if($resource == "games")
+                    $.get('/user/rate/games/{{ $item->bomb_id }}/' + star);
+                @elseif($resource == "platforms")
+                    $.get('/user/rate/platforms/{{ $item->bomb_id }}/' + star);
+                @endif
 
                 $('.rating-star').removeClass('full');
                 var star = $(e.target).attr('id').replace(/star/, '');

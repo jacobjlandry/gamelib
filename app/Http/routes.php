@@ -33,6 +33,14 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
     switch($resource) {
         case 'platforms':
             $item = \App\Platform::firstOrNew(['bomb_id' => $id]);
+            $details = \App\GiantBomb::getItem("platform", $id);
+            if(!$item->exists) {
+                $item->name = $details->results->name;
+                $item->image = $details->results->image->super_url;
+                $item->bomb_url = $details->results->site_detail_url;
+                $item->detail_url = $details->results->api_detail_url;
+                $item->save();
+            }
             break;
         case 'games':
             $item = \App\Game::firstOrNew(['bomb_id' => $id]);
@@ -95,8 +103,8 @@ Route::get('/user/toss/{resource}/{id}/{platformId?}', function($resource, $id, 
     return Auth::user()->toss($resource, $id, $platformId);
 });
 
-Route::get('/user/rate/{resource}/{id}/{rating}/{platformId?}', function($resource, $id, $rating, $platformId = null) {
-    return Auth::user()->rate($resource, $id, $rating, $platformId);
+Route::get('/user/rate/{resource}/{id}/{rating}', function($resource, $id, $rating) {
+    return Auth::user()->rate($resource, $id, $rating);
 });
 
 Route::get('/user/games/{platformId?}', 'UserController@games');
