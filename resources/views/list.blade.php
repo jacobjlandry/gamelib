@@ -2,7 +2,7 @@
 @section('content')
     <div class="list-container">
         <div class="list">
-            @if(count($list) > 0)
+            @if($max_results > 0)
                 @foreach($list as $item)
                     <div id="{{ $item->id }}Item" class="item">
                         <div class="ribbon-wrapper-green" style="display: @if(Auth::user()->has($resource, $item->id)) block @else none @endif"><div class="ribbon-green">Owned</div></div>
@@ -36,7 +36,7 @@
             @endif
         </div>
     </div>
-    @if(count($list) > 0)
+    @if($page_results > 0)
         <div class="paginator">
             <ul class="pagination">
                 <li>

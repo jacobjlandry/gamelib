@@ -14,10 +14,10 @@ class GiantBomb extends Model
         return json_decode(file_get_contents(env('BOMB_URL') . $resource . '?' . http_build_query($params)));
     }
 
-    public static function search($term)
+    public static function search($term, $page)
     {
         ini_set("user_agent","Games Library");
-        $params = array_merge(array('api_key' => env('BOMB_KEY'),'format' => 'json'), array('query' => $term, 'resources' => 'game'));
+        $params = array_merge(array('api_key' => env('BOMB_KEY'),'format' => 'json'), array('query' => $term, 'resources' => 'game', 'page' => $page));
         return json_decode(file_get_contents(env('BOMB_URL') . "search?" . http_build_query($params)));
     }
 

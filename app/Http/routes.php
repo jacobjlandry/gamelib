@@ -85,14 +85,14 @@ Route::get('game/beat/{platformId}/{gameId}/{value}', function($platformId, $gam
     Auth::user()->beat($platformId, $gameId, $value);
 });
 
-Route::get('/search/{term}', function($term) {
-    $list = \App\GiantBomb::search($term);
+Route::get('/search/{term}/{page?}', function($term, $page = 1) {
+    $list = \App\GiantBomb::search($term, $page);
 
     return view('list', ['list' => $list->results,
         'max_results' => $list->number_of_total_results,
         'page_results' => $list->number_of_page_results,
         'page_limit' => $list->limit,
-        'page' => 1,
+        'page' => $page,
         'resource' => "games"]);
 });
 

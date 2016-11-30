@@ -36,7 +36,7 @@
             // submit search via button
             $('#search').on('click', function(e) {
                 if($('#term').val()) {
-                    window.location = '/search/' + $('#term').val();
+                    window.location = '/search/' + $('#term').val() + '/1';
                 }
             });
 
