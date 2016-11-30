@@ -54,20 +54,22 @@ Route::get('basic/{resource}/{id}', function($resource, $id) {
                 $item->save();
             }
 
-            foreach($details->results->platforms as $platformInfo) {
-                $platform = \App\Platform::firstOrNew(['bomb_id' => $platformInfo->id]);
-                // Create Platform
-                if(!$platform->exists) {
-                    $platformDetails = \App\GiantBomb::getItem("platform", $platformInfo->id);
-                    $platform->name = $platformDetails->results->name;
-                    $platform->image = $platformDetails->results->image->super_url;
-                    $platform->bomb_url = $platformDetails->results->site_detail_url;
-                    $platform->detail_url = $platformDetails->results->api_detail_url;
-                    $platform->save();
-                }
+            if(is_array($details->results->platforms)) {
+                foreach($details->results->platforms as $platformInfo) {
+                    $platform = \App\Platform::firstOrNew(['bomb_id' => $platformInfo->id]);
+                    // Create Platform
+                    if(!$platform->exists) {
+                        $platformDetails = \App\GiantBomb::getItem("platform", $platformInfo->id);
+                        $platform->name = $platformDetails->results->name;
+                        $platform->image = $platformDetails->results->image->super_url;
+                        $platform->bomb_url = $platformDetails->results->site_detail_url;
+                        $platform->detail_url = $platformDetails->results->api_detail_url;
+                        $platform->save();
+                    }
 
-                // Map Game to Platform
-                $map = \App\GamePlatform::firstOrCreate(['game_id' => $item->bomb_id, 'platform_id' => $platform->bomb_id]);
+                    // Map Game to Platform
+                    $map = \App\GamePlatform::firstOrCreate(['game_id' => $item->bomb_id, 'platform_id' => $platform->bomb_id]);
+                }
             }
             break;
     }
