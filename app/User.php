@@ -191,12 +191,16 @@ class User extends Authenticatable
                         }
                     }
                 }
+                $otherPlatformMap = \App\UserGame::where('user_id', $this->id)->where('game_id', $game->bomb_id)->withTrashed()->first();
                 $map = \App\UserGame::where('user_id', $this->id)->where('game_id', $game->bomb_id)->where('platform_id', $platformId)->withTrashed()->first();
                 if(!is_object($map)) {
                     $map = new \App\UserGame(['user_id' => $this->id, 'game_id' => $game->bomb_id, 'platform_id' => $platformId, 'own' => 1]);
                 }
                 else if($map->trashed()) {
                     $map->restore();
+                }
+                if(is_object($otherPlatformMap) && $otherPlatformMap->rating > 0) {
+                    $map->rating = $otherPlatformMap->rating;
                 }
                 $map->save();
                 if(!$this->has('platforms', $platformId)) {
