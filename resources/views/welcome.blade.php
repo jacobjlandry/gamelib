@@ -65,14 +65,18 @@
                                             <div class="image">
                                                 <div class="img">
                                                     @if($games->where('rating', $games->min('rating'))->first()->game()->image)
-                                                        <img src="{{ $games->where('rating', $games->min('rating'))->first()->game()->image }}" width="125" />
+                                                        <img src="{{ $games->filter(function($item, $key) {
+                                                            return $item->rating > 0;
+                                                        })->sortBy('rating')->first()->game()->image }}" width="125" />
                                                     @else
                                                         <i class="fa fa-chain-broken fa-4x"></i>
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="title">
-                                                {{ $games->where('rating', $games->min('rating'))->first()->game()->name }}
+                                                {{ $games->filter(function($item, $key) {
+                                                    return $item->rating > 0;
+                                                })->sortBy('rating')->first()->game()->name }}
                                             </div>
                                         </a>
                                     </div>
