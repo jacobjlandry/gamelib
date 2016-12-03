@@ -16,4 +16,9 @@ class UserGame extends Model
     {
         return \App\Game::where('bomb_id', $this->game_id)->first();
     }
+
+    public function platform()
+    {
+        return $this->hasOne('App\Platform', 'bomb_id', 'platform_id')->first();
+    }
 }

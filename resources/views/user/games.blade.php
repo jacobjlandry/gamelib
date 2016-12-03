@@ -4,8 +4,8 @@
     <div class="filters-container">
         <div class="user-game-controls" role="group" aria-label="Platforms" style="min-width: {{ (Auth::user()->platforms()->count() + 1) * 75 }}px;">
             <div class="item first"><a href="/user/games" class="@if(!$platformId) active @endif" role="button">All</a></div>
-            @foreach(Auth::user()->platforms() as $platform)
-                <div class="item middle @if($platformId == $platform->platform_id) active @endif" title="{{ $platform->platform()->name }}"><a href="/user/games/{{ $platform->platform_id }}">{{ $platform->platform()->nickname }}</a></div>
+            @foreach(Auth::user()->games()->unique('platform_id') as $game)
+                <div class="item middle @if($platformId == $game->platform_id) active @endif" title="{{ $game->platform()->name }}"><a href="/user/games/{{ $game->platform_id }}">{{ $game->platform()->nickname }}</a></div>
             @endforeach
         </div>
     </div>
