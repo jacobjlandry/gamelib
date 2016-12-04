@@ -58,13 +58,19 @@
                     </div>
                     <div id="leastFavoriteGame" class="user-stat">
                         <div class="detail">
-                            @if($games->where('rating', $games->min('rating'))->count())
+                            @if($games->filter(function($item, $key) {
+                                return $item->rating > 0;
+                            })->sortBy('rating')->first()->game()->count())
                                 <div class="list">
                                     <div class="item">
-                                        <a href="/basic/games/{{ $games->where('rating', $games->min('rating'))->first()->game()->bomb_id }}">
+                                        <a href="/basic/games/{{ $games->filter(function($item, $key) {
+                                             return $item->rating > 0;
+                                         })->sortBy('rating')->first()->game()->bomb_id }}">
                                             <div class="image">
                                                 <div class="img">
-                                                    @if($games->where('rating', $games->min('rating'))->first()->game()->image)
+                                                    @if($games->filter(function($item, $key) {
+                                                        return $item->rating > 0;
+                                                    })->sortBy('rating')->first()->game()->image)
                                                         <img src="{{ $games->filter(function($item, $key) {
                                                             return $item->rating > 0;
                                                         })->sortBy('rating')->first()->game()->image }}" width="125" />
