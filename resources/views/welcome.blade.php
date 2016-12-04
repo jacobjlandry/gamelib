@@ -60,7 +60,7 @@
                         <div class="detail">
                             @if($games->filter(function($item, $key) {
                                 return $item->rating > 0;
-                            })->sortBy('rating')->first()->game()->count())
+                            })->count())
                                 <div class="list">
                                     <div class="item">
                                         <a href="/basic/games/{{ $games->filter(function($item, $key) {
