@@ -64,8 +64,8 @@
                                 <div class="list">
                                     <div class="item">
                                         <a href="/basic/games/{{ $games->filter(function($item, $key) {
-                                             return $item->rating > 0;
-                                         })->sortBy('rating')->first()->game()->bomb_id }}">
+                                                return $item->rating > 0;
+                                            })->sortBy('rating')->first()->game()->bomb_id }}">
                                             <div class="image">
                                                 <div class="img">
                                                     @if($games->filter(function($item, $key) {
