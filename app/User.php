@@ -126,10 +126,10 @@ class User extends Authenticatable
     public function games($platformId = null)
     {
         if($platformId) {
-            return \App\UserGame::where('platform_id', $platformId)->get();
+            return \App\UserGame::where('user_id', $this->id)->where('platform_id', $platformId)->get();
         }
 
-        return \App\UserGame::all();
+        return \App\UserGame::where('user_id', $this->id)->get();
     }
 
     /**
@@ -137,7 +137,7 @@ class User extends Authenticatable
      */
     public function platforms()
     {
-        return \App\UserPlatform::all();
+        return \App\UserPlatform::where('user_id', $this->id)->get();
     }
 
     /**
@@ -148,7 +148,7 @@ class User extends Authenticatable
      */
     public function owned($gameId, $platformId)
     {
-        return \App\UserGame::where('game_id', $gameId)->where('platform_id', $platformId)->get()->count();
+        return \App\UserGame::where('user_id', $this->id)->where('game_id', $gameId)->where('platform_id', $platformId)->count();
     }
 
     /**
