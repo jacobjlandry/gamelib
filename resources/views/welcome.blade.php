@@ -109,8 +109,8 @@
     var platforms = Morris.Donut({
         element: 'platformChart',
         data: [
-            @foreach($gamesByPlatform as $platformId => $games)
-                { label: "{{ $platformId }}", value: {{ $games->count() }}},
+            @foreach(Auth::user()->gamePlatforms() as $platform)
+                { label: "{{ \App\Platform::where('bomb_id', $platform->platform_id)->first()->name }}", value: {{ $platform->games }}},
             @endforeach
         ],
         colors: ['#1976D2', '#388E3C', '#F57C00', '#F44336', '#FBC02D', '#512DA8', '#C2185B', '#0288D1', '#AFB428', '#E64A19', '#7B1FA2'],

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -129,7 +130,19 @@ class User extends Authenticatable
             return \App\UserGame::where('user_id', $this->id)->where('platform_id', $platformId)->groupBy('game_id')->get();
         }
 
-        return \App\UserGame::where('user_id', $this->id)->groupBy('game_id')->get();
+        return \App\UserGame::select(DB::raw('max(user_id) as user_id, max(game_id) as game_id, max(playing) as playing, max(played) as played, max(beat) as beat, max(rating) as rating, max(own) as own'))
+            ->where('user_id', $this->id)
+            ->groupBy('game_id')
+            ->get();
+    }
+
+    /**
+     * List of platforms user has games for
+     * @return mixed
+     */
+    public function gamePlatforms()
+    {
+        return \App\UserGame::select('platform_id', DB::raw('count(*) as games'))->groupBy('platform_id')->get();
     }
 
     /**

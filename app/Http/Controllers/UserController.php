@@ -17,14 +17,11 @@ class UserController extends Controller
     {
         if(Auth::user()) {
             $games = Auth::user()->games();
-            $platforms = array();
-            foreach($games->unique('platform_id') as $platform) {
-                $platforms[] = $platform->platform_id;
-            }
+            $platforms = \App\UserGame::select('platform_id')->where('user_id', Auth::user()->id)->get()->unique('platform_id');
 
             $gamesByPlatform = array();
             foreach($platforms as $platform) {
-                $gamesByPlatform[\App\Platform::where('bomb_id', $platform)->first()->name] = $games->where('platform_id', $platform);
+                $gamesByPlatform[\App\Platform::where('bomb_id', $platform->platform_id)->first()->name] = $games->where('platform_id', $platform->platform_id);
             }
 
             return view('welcome', ['user' => Auth::user(), 'resource' => 'user', 'games' => $games, 'platforms' => collect($platforms), 'gamesByPlatform' => collect($gamesByPlatform)]);
@@ -87,9 +84,7 @@ class UserController extends Controller
 
         $list = array();
         foreach($games as $owned) {
-            $game = \App\Game::where('bomb_id', $owned->game_id)->first();
-            $game->platform = \App\Platform::where('bomb_id', $owned->platform_id)->first()->name;
-            $list[] = $game;
+            $list[] = \App\Game::where('bomb_id', $owned->game_id)->first();
         }
 
         $list = collect($list)->sortBy('name');
