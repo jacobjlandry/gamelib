@@ -126,10 +126,10 @@ class User extends Authenticatable
     public function games($platformId = null)
     {
         if($platformId) {
-            return \App\UserGame::where('user_id', $this->id)->where('platform_id', $platformId)->get();
+            return \App\UserGame::where('user_id', $this->id)->where('platform_id', $platformId)->groupBy('game_id')->get();
         }
 
-        return \App\UserGame::where('user_id', $this->id)->get();
+        return \App\UserGame::where('user_id', $this->id)->groupBy('game_id')->get();
     }
 
     /**

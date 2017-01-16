@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="title">
-                            {{ $game->name }} ({{ $game->platform }})
+                            {{ $game->name }}
                         </div>
                     </a>
                 </div>

@@ -48,6 +48,14 @@ class UserController extends Controller
     {
         $games = Auth::user()->games($platformId);
 
+        // gather playing if needed
+        if($request->input('playing') == 1) {
+            $games = $games->where('playing', '1');
+        }
+        else if($request->input('playing') == '0') {
+            $games = $games->where('playing', '0');
+        }
+
         // gather played/unplayed if needed
         // @TODO put this in session for when user goes or clicks on a platform?
         if($request->input('played') == 1) {
@@ -84,7 +92,7 @@ class UserController extends Controller
             $list[] = $game;
         }
 
-        $list = collect($list);
+        $list = collect($list)->sortBy('name');
 
         return view('user.games', ['user' => Auth::user(), 'resource' => 'user', 'games' => $list, 'platformId' => $platformId]);
     }
