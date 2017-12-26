@@ -15,9 +15,9 @@
                 <div class="panel-body">
                     <div id="gamesCount" class="user-stat"><div class="number"><a href="user/games">{{ $games->count() }}</a></div> <div class="descriptor">Games</div></div>
                     <div id="platformCount" class="user-stat"><div class="number"><a href="user/platforms">{{ $platforms->count() }}</a></div> <div class="descriptor">Platforms</div></div>
-                    <div id="gamesPlaying" class="user-stat"><div class="number"><a href="user/games?playing=1">{{ $games->where('playing', '1')->count() }}</a></div> <div class="descriptor">Playing</div></div>
-                    <div id="gamesPlayed" class="user-stat"><div class="number"><a href="/user/games?played=1">{{ $games->where('played', '1')->count() }}</a>/<a href="/user/games?played=0">{{ $games->where('played', '0')->count() }}</a></div><div class="descriptor">Played/Unplayed</div></div>
-                    <div id="gamesBeat" class="user-stat"><div class="number"><a href="/user/games?beat=1">{{ $games->where('beat', '1')->count() }}</a>/<a href="/user/games/?beat=0">{{ $games->where('beat', '0')->count() }}</a></div> <div class="descriptor">Beat/Unbeat</div></div>
+                    <div id="gamesPlaying" class="user-stat"><div class="number"><a href="user/games?playing=1">{{ $games->where('playing', 1)->count() }}</a></div> <div class="descriptor">Playing</div></div>
+                    <div id="gamesPlayed" class="user-stat"><div class="number"><a href="/user/games?played=1">{{ $games->where('played', 1)->count() }}</a>/<a href="/user/games?played=0">{{ $games->where('played', 0)->count() }}</a></div><div class="descriptor">Played/Unplayed</div></div>
+                    <div id="gamesBeat" class="user-stat"><div class="number"><a href="/user/games?beat=1">{{ $games->where('beat', 1)->count() }}</a>/<a href="/user/games/?beat=0">{{ $games->where('beat', 0)->count() }}</a></div> <div class="descriptor">Beat/Unbeat</div></div>
                 </div>
             </div>
             <div class="panel panel-warning">
@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     <div id="gamesRated" class="user-stat"><div class="number"><a href="/user/games?rated=1">{{ $games->filter(function($value, $key) {
                         return $value->rating > 0;
-                    })->count() }}</a>/<a href="/user/games?rated=0">{{ $games->where('rating', '0')->count() }}</a></div> <div class="descriptor">Rated/Unrated</div></div>
+                    })->count() }}</a>/<a href="/user/games?rated=0">{{ $games->where('rating', 0)->count() }}</a></div> <div class="descriptor">Rated/Unrated</div></div>
                     <div id="avgRating" class="user-stat"><div class="number">{{ round($games->filter(function($value, $key) {
                         return $value->rating > 0;
                     })->average('rating'), 1) }}</div><div class="descriptor">Average Rating</div></div>
